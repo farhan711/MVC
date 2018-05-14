@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MovieMix.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+@if (!Model.Any())
+{
+
+    <p> We don't have any customers yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+
+        <thead>
+
+            <tr>
+
+                <th>Customer</th>
+                <th>Discount Rate</th>
+                <th>Duration</th>
+                <th>ID</th>
+                <th>plan Name</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { Id = customer.Id }, null)</td>
+                    <td>@customer.MembershipType.DiscountRate%</td>
+                    <td>@customer.MembershipType.DurationInMonths</td>
+                    <td>@customer.MembershipType.Id</td>
+                    <td>@customer.MembershipType.MemberShipTypeName</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,18 @@
+﻿@model MovieMix.Models.Customer
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+<ul>
+
+    <li>Membership Type: @Model.MembershipType.MemberShipTypeName
+    </li>
+    @if(Model.DOB != null)
+    {
+        <li>Birthdate: @Model.DOB.Value.ToShortDateString()</li>
+    }
+</ul>
+

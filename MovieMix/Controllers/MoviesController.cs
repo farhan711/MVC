@@ -30,7 +30,7 @@ namespace MovieMix.Controllers
             return View(movies);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             var movie = _context.Movies.Include(m => m.GenreN).SingleOrDefault(m => m.Id == id);
 

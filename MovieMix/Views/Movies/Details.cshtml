@@ -9,8 +9,11 @@
 
 <h2>@Model.Name</h2>
 <ul>
-
+    @if (Model.GenreN != null)
+    {
     <li>   Genre: @Model.GenreN.Name</li>
+    }
+    
     <li>   Release Date: @Model.ReleaseDate.ToLongDateString()</li>
     <li>   Date Added: @Model.DateAdded.ToLongDateString()</li>
     <li>   Number of Stock: @Model.NumberofStocks</li>

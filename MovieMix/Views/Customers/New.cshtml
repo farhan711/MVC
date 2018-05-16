@@ -1,4 +1,4 @@
-﻿@model MovieMix.Models.Customer
+﻿@model MovieMix.ViewModels.NewCustomerViewModel
 @{
     ViewBag.Title = "New";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,17 +9,17 @@
 @using (Html.BeginForm("Create", "Customer"))
 {
     <div class="form-group">
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Customer.Name)
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.DOB)
-        @Html.TextBoxFor(m => m.DOB, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Customer.DOB)
+        @Html.TextBoxFor(m => m.Customer.DOB, new { @class = "form-control" })
     </div>
     <div class="checkbox">
         <label>
-            @Html.CheckBoxFor(m => m.IsSubscribeToNewsletter) Subscribe to newsletter? 
-        </label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribeToNewsletter) Subscribe to newsletter? 
+        </label> 
         </div>
 
 }

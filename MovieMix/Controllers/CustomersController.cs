@@ -5,6 +5,7 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
+using MovieMix.ViewModels;
 
 namespace MovieMix.Controllers
 {
@@ -23,7 +24,12 @@ namespace MovieMix.Controllers
 
         public ActionResult New()
         {
-            return View();
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new NewCustomerViewModel
+            {
+                    membershipTypes = membershipTypes
+            };
+            return View(viewModel);
         }
         public ViewResult Index()
         {

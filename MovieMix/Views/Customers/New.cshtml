@@ -18,9 +18,13 @@
     </div>
     <div class="checkbox">
         <label>
-            @Html.CheckBoxFor(m => m.Customer.IsSubscribeToNewsletter) Subscribe to newsletter? 
-        </label> 
-        </div>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribeToNewsletter) Subscribe to newsletter?
+        </label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.MembershipId)
+        @Html.DropDownListFor(m => m.Customer.MembershipId, new SelectList(Model.membershipTypes, "Id", "MemberShipTypeName"), "Select Membership Type", new { @class = "form-control"})
+    </div>
 
 }
 

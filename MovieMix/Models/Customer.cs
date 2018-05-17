@@ -15,6 +15,8 @@ namespace MovieMix.Models
         public bool IsSubscribeToNewsletter { get; set; }
         public MembershipType MembershipType { get; set; }
         public DateTime? DOB { get; set; }
+
+        [Display(Name = "Membership Type")]
         public byte MembershipId { get; set; }
 
     }

@@ -29,15 +29,26 @@ namespace MovieMix.Controllers
             {
                 membershipTypes = membershipTypes
             };
-            return View("CustomerForm", viewModel);
+            return View(viewModel);
         }
+
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if (customer.Id == 0)
+                _context.Customers.Add(customer);
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+                customerInDb.Name = customer.Name;
+                customerInDb.DOB = customer.DOB;
+                customerInDb.MembershipId = customer.MembershipId;
+                customerInDb.IsSubscribeToNewsletter = customer.IsSubscribeToNewsletter;
+            }
+
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Customer");
+            return RedirectToAction("Index", "Customers");
         }
 
         public ViewResult Index()
@@ -59,7 +70,7 @@ namespace MovieMix.Controllers
         }
         public ActionResult Edit(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(c=> c.Id == id);
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
             if (customer == null)
             {
                 return HttpNotFound();

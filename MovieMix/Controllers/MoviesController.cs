@@ -36,6 +36,22 @@ namespace MovieMix.Controllers
             };
             return View("MovieForm");
         }
+        public ActionResult Edit(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+            if(movie == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                Genres = _context.GenresN.ToList()
+
+            };
+            return View("MovieForm", viewModel);
+
+        }
         public ActionResult Details(int? id)
         {
             var movie = _context.Movies.Include(m => m.GenreN).SingleOrDefault(m => m.Id == id);

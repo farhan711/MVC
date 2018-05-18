@@ -5,7 +5,8 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
-
+using MovieMix.Migrations;
+using MovieMix.ViewModels;
 namespace MovieMix.Controllers
 {
     public class MoviesController : Controller
@@ -29,14 +30,24 @@ namespace MovieMix.Controllers
 
             return View(movies);
         }
+        public ViewResult New()
+        {
+            var genres = _context.GenresN.ToList();
 
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
+            return View("MovieForm");
+        }
         public ActionResult Details(int? id)
         {
             var movie = _context.Movies.Include(m => m.GenreN).SingleOrDefault(m => m.Id == id);
 
             if (movie == null)
+            {
                 return HttpNotFound();
-
+            }
             return View(movie);
 
         }

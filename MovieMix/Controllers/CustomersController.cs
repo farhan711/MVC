@@ -29,7 +29,7 @@ namespace MovieMix.Controllers
             {
                 membershipTypes = membershipTypes
             };
-            return View(viewModel);
+            return View("CustomerForm", viewModel);
         }
 
         [HttpPost]

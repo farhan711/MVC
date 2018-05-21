@@ -26,6 +26,8 @@ namespace MovieMix.Models
         public DbSet<MembershipType> MembershipTypes { get; set; }
         public object Genres { get; internal set; }
 
+            
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

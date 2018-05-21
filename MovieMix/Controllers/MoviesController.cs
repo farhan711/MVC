@@ -34,7 +34,7 @@ namespace MovieMix.Controllers
             {
                 Genres = genres
             };
-            return View("MovieForm");
+            return View("MovieForm", viewModel);
         }
         public ActionResult Edit(int id)
         {
@@ -66,6 +66,7 @@ namespace MovieMix.Controllers
                 movieInDb.Genre = movie.Genre;
                 movieInDb.NumberofStocks = movie.NumberofStocks;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
+               // movieInDb.DateAdded = movie.DateAdded;
 
             }
             _context.SaveChanges();

@@ -14,8 +14,13 @@ namespace MovieMix.Models
         public String Name { get; set; }
         public bool IsSubscribeToNewsletter { get; set; }
         public MembershipType MembershipType { get; set; }
+
+
+        [Display(Name = "Date of Birth")]
+        [Min18YearsIfAMember]
         public DateTime? DOB { get; set; }
-        [Display(Name = "Membership Type")]
+       
+
         public byte MembershipId { get; set; }
 
     }

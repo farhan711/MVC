@@ -47,10 +47,8 @@ namespace MovieMix.Controllers
             {
                 Movie = movie,
                 Genres = _context.GenresN.ToList()
-
             };
             return View("MovieForm", viewModel);
-
         }
         [HttpPost]
         public ActionResult Save(Movie movie)
@@ -67,7 +65,6 @@ namespace MovieMix.Controllers
                 movieInDb.NumberofStocks = movie.NumberofStocks;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                // movieInDb.DateAdded = movie.DateAdded;
-
             }
             _context.SaveChanges();
 
@@ -81,7 +78,6 @@ namespace MovieMix.Controllers
                 return HttpNotFound();
             }
             return View(movie);
-
         }
 
     }

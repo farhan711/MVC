@@ -12,7 +12,7 @@ namespace MovieMix.Models
         {
             var customer = (Customer)validationContext.ObjectInstance;
 
-            if(customer.MembershipId == 1)
+            if(customer.MembershipId == MembershipType.Unkown || customer.MembershipId == MembershipType.PayAsYouGo)
             {
                 return ValidationResult.Success;
             }
@@ -20,12 +20,8 @@ namespace MovieMix.Models
             {
                 return new ValidationResult("Birthdate is Required");
             }
-
             var age = DateTime.Today.Year - customer.DOB.Value.Year;
             return (age >= 18) ? ValidationResult.Success : new ValidationResult("Customer must be 18 years old or above");
-
-
         }
-
     }
 }

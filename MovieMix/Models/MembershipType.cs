@@ -16,5 +16,10 @@ namespace MovieMix.Models
         public byte DiscountRate { get; set; }
         public String MemberShipTypeName { get; set; }
 
+        public static readonly byte Unkown = 0;
+        public static readonly byte PayAsYouGo = 1;
+     
+        
+
     }
 }

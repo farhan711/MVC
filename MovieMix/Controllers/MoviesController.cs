@@ -5,7 +5,6 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
-using MovieMix.Migrations;
 using MovieMix.ViewModels;
 namespace MovieMix.Controllers
 {
@@ -43,7 +42,7 @@ namespace MovieMix.Controllers
             {
                 return HttpNotFound();
             }
-            var viewModel = new MovieFormViewModel
+            var viewModel = new MovieFormViewModel(movie)
             {
                 Movie = movie,
                 Genres = _context.GenresN.ToList()
@@ -51,9 +50,18 @@ namespace MovieMix.Controllers
             return View("MovieForm", viewModel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
-            if (movie.Id == 0){
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel(movie)
+                {
+                    Genres = _context.GenresN.ToList()
+                };
+                return View("MovieForm", viewModel);
+            }
+                if (movie.Id == 0){
                 movie.DateAdded = DateTime.Now;
                 _context.Movies.Add(movie);
             }

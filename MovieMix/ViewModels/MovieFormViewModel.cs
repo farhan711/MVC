@@ -8,6 +8,11 @@ namespace MovieMix.ViewModels
 {
     public class MovieFormViewModel
     {
+        public MovieFormViewModel(Movie movie)
+        {
+            Movie = movie;
+        }
+
         public IEnumerable<GenreN> Genres { get; set; }
         public Movie Movie { get; set; }
         public String Title

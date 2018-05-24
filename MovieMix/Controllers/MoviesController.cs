@@ -31,7 +31,7 @@ namespace MovieMix.Controllers
             var genres = _context.GenresN.ToList();
             var viewModel = new MovieFormViewModel
             {
-                Genres = genres
+                Genres = genres 
             };
             return View("MovieForm", viewModel);
         }

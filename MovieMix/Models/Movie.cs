@@ -20,6 +20,8 @@ namespace MovieMix.Models
         public DateTime ReleaseDate { get; set; }
 
         public DateTime DateAdded { get; set; }
+
+        [Range(1,20)]
         public byte NumberofStocks { get; set; }
     }
 }

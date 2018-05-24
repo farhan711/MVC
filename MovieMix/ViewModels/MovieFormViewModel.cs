@@ -10,9 +10,13 @@ namespace MovieMix.ViewModels
     {
         public MovieFormViewModel(Movie movie)
         {
-            Movie = movie;
+            Id = movie.Id;
+            Name = movie.Name;
+            ReleaseDate = movie.ReleaseDate;
+            NumberInStock = movie.NumberofStocks;
+            GenreId = movie.Genre;
+              
         }
-
         public IEnumerable<GenreN> Genres { get; set; }
         public Movie Movie { get; set; }
         public String Title
@@ -26,5 +30,14 @@ namespace MovieMix.ViewModels
                 return "New Movie";
             }
         }
+        public MovieFormViewModel()
+        {
+            Id = 0;
+        }
+        public int Id { get; }
+        public string Name { get; }
+        public DateTime ReleaseDate { get; private set; }
+        public byte NumberInStock { get; }
+        public byte GenreId { get; }
     }
 }

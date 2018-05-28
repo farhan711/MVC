@@ -15,7 +15,6 @@ namespace MovieMix.ViewModels
             ReleaseDate = movie.ReleaseDate;
             NumberInStock = movie.NumberofStocks;
             GenreId = movie.Genre;
-              
         }
         public IEnumerable<GenreN> Genres { get; set; }
         public Movie Movie { get; set; }

@@ -24,6 +24,8 @@ namespace MovieMix.ViewModels
         public DateTime DateAdded { get; set; }
 
         [Range(1, 20)]
+        [Required]
+        [Display(Name = "Number of Stock")]
         public byte NumberofStocks { get; set; }
          
         public String Title
@@ -35,6 +37,8 @@ namespace MovieMix.ViewModels
         }
         public MovieFormViewModel()
         {
+            //Default constructot for creating New movie
+
             Id = 0;
         }
        
@@ -45,6 +49,7 @@ namespace MovieMix.ViewModels
             ReleaseDate = movie.ReleaseDate;
             NumberofStocks = movie.NumberofStocks;
             Genre = movie.Genre;
+            //Constructor
         }
     }
 }

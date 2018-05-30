@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using MovieMix.Dtos;
 using MovieMix.Models;
 
 namespace MovieMix.Controllers.API
@@ -17,13 +18,15 @@ namespace MovieMix.Controllers.API
         }
 
         //Get /API/Customers
-        public IEnumerable<Customer> GetCustomers()
+        public IHttpActionResult     GetCustomers()
         {
-            return _context.Customers.ToList();
+            List<Customer> customers = _context.Customers.ToList();
+            List<CustomerDTO> vm = AutoMapper.Mapper.Map<List<CustomerDTO>>(customers);
+            return Ok(vm);
         }
 
         //Get /API/Customers/1
-        public Customer GetCustomer(int id)
+        public CustomerDTO GetCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
             if (customer == null)
@@ -31,26 +34,28 @@ namespace MovieMix.Controllers.API
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             }
-            return customer;
+            return AutoMapper.Mapper.Map<Customer, CustomerDTO>(customer);
         }
         //POST /API/customer
         [HttpPost]
-        public Customer CreateCustomer(Customer customer)
+        public CustomerDTO CreateCustomer(CustomerDTO customerDto  )
         {
             if (!ModelState.IsValid)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
+            var customer = AutoMapper.Mapper.Map<CustomerDTO, Customer>(customerDto);
             _context.Customers.Add(customer);
             _context.SaveChanges();
+            customerDto.Id = customer.Id;
 
-
-            return customer;
+                
+            return customerDto;
 
         }
         //PUT API/customer/1
         [HttpPut]
-        public void UpdateCutomer (int id, Customer customer)
+        public void UpdateCutomer (int id, CustomerDTO customerDto)
         {
             if (!ModelState.IsValid)
             {
@@ -63,12 +68,7 @@ namespace MovieMix.Controllers.API
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             }
-            customerInDB.Name = customer.Name;
-            customerInDB.Id = customer.Id;
-            customerInDB.DOB = customer.DOB;
-            customerInDB.IsSubscribeToNewsletter = customer.IsSubscribeToNewsletter;
-            customerInDB.MembershipType = customer.MembershipType;
-
+            AutoMapper.Mapper.Map(customerDto, customerInDB);
             _context.SaveChanges();
 
         }
@@ -86,5 +86,6 @@ namespace MovieMix.Controllers.API
             _context.Customers.Remove(customerInDB);
             _context.SaveChanges();
         }
+
     }
 }

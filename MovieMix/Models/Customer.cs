@@ -9,7 +9,7 @@ namespace MovieMix.Models
     public class Customer
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "PLease Enter Name")]
         [StringLength(255)]
         public String Name { get; set; }
         public bool IsSubscribeToNewsletter { get; set; }

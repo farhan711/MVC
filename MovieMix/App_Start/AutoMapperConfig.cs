@@ -12,7 +12,6 @@ namespace MovieMix.App_Start
         public static void Init()
         {
             Mapper.Initialize(c => c.AddProfile<DomainToDtoMappingProfile>());
-
         }
     }
 }

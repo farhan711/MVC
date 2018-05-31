@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -16,15 +17,13 @@ namespace MovieMix.Controllers.API
         {
             _context = new ApplicationDbContext();
         }
-
         //Get /API/Customers
-        public IHttpActionResult     GetCustomers()
+        public IHttpActionResult GetCustomers()
         {
             List<Customer> customers = _context.Customers.ToList();
-            List<CustomerDTO> vm = AutoMapper.Mapper.Map<List<CustomerDTO>>(customers);
+            List<CustomerDTO> vm = Mapper.Map<List<CustomerDTO>>(customers);
             return Ok(vm);
         }
-
         //Get /API/Customers/1
         public CustomerDTO GetCustomer(int id)
         {
@@ -34,23 +33,22 @@ namespace MovieMix.Controllers.API
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             }
-            return AutoMapper.Mapper.Map<Customer, CustomerDTO>(customer);
+            return Mapper.Map<Customer, CustomerDTO>(customer);
         }
         //POST /API/customer
         [HttpPost]
-        public CustomerDTO CreateCustomer(CustomerDTO customerDto  )
+        public IHttpActionResult CreateCustomer(CustomerDTO customerDto)
         {
             if (!ModelState.IsValid)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
             }
-            var customer = AutoMapper.Mapper.Map<CustomerDTO, Customer>(customerDto);
+            var customer = Mapper.Map<CustomerDTO, Customer>(customerDto);
             _context.Customers.Add(customer);
             _context.SaveChanges();
-            customerDto.Id = customer.Id;
 
-                
-            return customerDto;
+            customerDto.Id = customer.Id;
+            return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto);
 
         }
         //PUT API/customer/1
@@ -68,7 +66,7 @@ namespace MovieMix.Controllers.API
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             }
-            AutoMapper.Mapper.Map(customerDto, customerInDB);
+           Mapper.Map(customerDto, customerInDB);
             _context.SaveChanges();
 
         }
@@ -86,6 +84,5 @@ namespace MovieMix.Controllers.API
             _context.Customers.Remove(customerInDB);
             _context.SaveChanges();
         }
-
     }
 }

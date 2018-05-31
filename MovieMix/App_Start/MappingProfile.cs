@@ -22,9 +22,9 @@ namespace MovieMix.App_Start
         public DomainToDtoMappingProfile()
         {
             //Mapper.CreateMap<Customer, CustomerDTO>().ReverseMap();
-            Mapper.CreateMap<Customer, CustomerDTO>()
-                .ForMember(dest => dest.Name, src => src.MapFrom(s => s.Name + "XYZ"));                
+            Mapper.CreateMap<Customer, CustomerDTO>();
+          //      .ForMember(dest => dest.Name, src => src.MapFrom(s => s.Name + "XYZ"));                
                 
-        }
+        }   
     }
 }

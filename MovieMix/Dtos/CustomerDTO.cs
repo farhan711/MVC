@@ -15,9 +15,9 @@ namespace MovieMix.Dtos
         public String Name { get; set; }
         public bool IsSubscribeToNewsletter { get; set; }
 
-        [Min18YearsIfAMember]
+       /// [Min18YearsIfAMember]
         public DateTime? DOB { get; set; }
 
-        //public byte MembershipId { get; set; }
+        public byte MembershipId { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MovieMix.App_Start
 {
-    public class AutofaccConfig
+    public class AutofacConfig
     {
         public static void Run()
         {
@@ -22,14 +22,14 @@ namespace MovieMix.App_Start
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterModelBinders(typeof(MvcApplication).Assembly);
             builder.RegisterModelBinderProvider();
-
+           
             // OPTIONAL: Register web abstractions like HttpContextBase.
             builder.RegisterModule<AutofacWebTypesModule>();
 
+
             // OPTIONAL: Enable property injection in view pages.
             builder.RegisterSource(new ViewRegistrationSource());
-
-
+            
 
             // OPTIONAL: Enable property injection into action filters.
             builder.RegisterFilterProvider();

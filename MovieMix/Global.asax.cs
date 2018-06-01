@@ -22,7 +22,7 @@ namespace MovieMix
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            AutofaccConfig.Run();
+            AutofacConfig.Run();
             AutoMapperConfig.Init();
         }
     }
